@@ -47,7 +47,10 @@ def on_message(_client, _userdata, msg):
         # If result starts with { asume it is json.
         if result.startswith("{"):
             print(f"Received message on topic '{msg.topic}'")
+            # Change smart quotes to normal double quotes.
+            result = result.replace("“", "\"").replace("”", "\"")
             # Convert result string to json.
+            print(f"Decoded message: '{result}'")
             data = json.loads(result)
             # Print the jason in a pritty way with indent 4.
             print(json.dumps(data, indent=4))
@@ -60,11 +63,7 @@ def on_message(_client, _userdata, msg):
     # Safely print the result that may be ascii but may also contain binary.
     print(repr(msg.payload))
     service_envelope = mesh_stream.decode.service_envelope(msg)
-    #print(service_envelope.packet)
-    # convert service envelope to json
-    json_string = MessageToJson(service_envelope)
-    json_data = json.loads(json_string)
-    print(json.dumps(json_data, indent=4))
+    print(json.dumps(service_envelope, indent=4))
 
 def main():
     """
