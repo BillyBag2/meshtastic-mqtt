@@ -12,12 +12,15 @@ import paho.mqtt.enums as mqtt_enums
 
 import mesh_stream
 
+#SUBSCIBE_TOPICS = "msh/EU_868/2/e/LongFast/#"
+SUBSCIBE_TOPICS = "msh/EU_868/2/e/LongFast/!da545314"
+
 def on_connect(client, _userdata, _flags, result_code, _properties):
     """
     Called when connected to MQTT server
     """
     print("Connected with result code "+str(result_code))
-    client.subscribe("msh/#")
+    client.subscribe(SUBSCIBE_TOPICS)
 
 def on_message(_client, _userdata, msg):
     """

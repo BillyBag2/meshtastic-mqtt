@@ -135,6 +135,6 @@ def service_envelope(msg):
             json_data["packet"]["decoded"].update(unpacked_payload)
         return json_data
     except Exception as exception:
-        raise
+        #raise
         print(f"Error decoding message: {exception}")
         return None
